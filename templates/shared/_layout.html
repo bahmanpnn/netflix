@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block header_links %}
+
+    {% endblock %}
+
+    <title>{% block title %}title{% endblock %}</title>
+</head>
+<body class="bg-black text-gray-100">
+{% include 'shared/nav_partial.html' %}
+{% block content %}
+
+{% endblock %}
+{#<script src="/static/custom.js"></script>#}
+<script>
+    const nav = document.querySelector('nav')
+    document.addEventListener('scroll', function (e) {
+        if (scrollY > 100) {
+            nav.classList.add('bg-gray-900')
+        } else {
+            nav.classList.remove('bg-gray-900')
+        }
+    })
+</script>
+</body>
+</html>

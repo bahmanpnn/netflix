@@ -14,11 +14,14 @@ MOVIE_TYPE = (
 )
 
 
-class CustomUser(AbstractUser):
+class User(AbstractUser):
     profiles = models.ManyToManyField('Profile')
 
 
 class Profile(models.Model):
+    avatar = models.ImageField(upload_to='images/avatars',
+                               null=True,
+                               blank=True)
     name = models.CharField(max_length=225)
     age_limit = models.CharField(max_length=6, choices=AGE_CHOICES)
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
