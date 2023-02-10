@@ -78,3 +78,26 @@ class MovieList(View):
             return render(request, 'movieList.html', context)
         except Profile.DoesNotExist:
             return redirect(reverse('profile-list'))
+
+
+class ShowMovieDetail(View):
+    def get(self, request, movie_id):
+        try:
+            movie = Movie.objects.get(uuid=movie_id)
+            return render(request, 'movieDetail.html', {
+                'movie': movie
+            })
+        except Movie.DoesNotExist:
+            return redirect(reverse('profile-list'))
+
+
+class ShowMovie(View):
+    def get(self, request, movie_id):
+        try:
+            movie = Movie.objects.get(uuid=movie_id)
+            movie = movie.videos.values()
+            return render(request, 'showMovie.html', {
+                'movie': list(movie)
+            })
+        except Movie.DoesNotExist:
+            return redirect(reverse('profile-list'))
